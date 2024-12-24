@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background: #f0f2f5;
+            color: #2c3e50;
+        }
+        
+        .cv-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(120deg, #2c3e50 0%, #3498db 100%);
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.2) 0%, rgba(44, 62, 80, 0.2) 100%);
+            transform: skewY(-6deg);
+            transform-origin: top left;
+        }
+        
+        .name {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        
+        .title {
+            font-size: 22px;
+            opacity: 0.95;
+            margin-bottom: 25px;
+            font-weight: 300;
+            position: relative;
+        }
+        
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            font-size: 15px;
+            position: relative;
+        }
+        
+        .contact span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+        
+        .contact span:hover {
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            padding: 40px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db 0%, #2c3e50 100%);
+            border-radius: 3px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-title {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #3498db;
+            transition: transform 0.2s;
+        }
+        
+        .experience-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .job-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .company {
+            color: #3498db;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .date {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 15px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.6;
+        }
+        
+        li::before {
+            content: "►";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+            top: 5px;
+            opacity: 0.8;
+        }
+        
+        .education-item {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .education-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .language-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .language-name {
+            font-weight: 500;
+        }
+        
+        .language-level {
+            color: #3498db;
+            font-size: 14px;
+        }
+        
+        .profile-text {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .cv-container {
+                margin: 20px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .contact {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="header">
+            <div class="name">Systems and Network Administrator</div>
+            <div class="title">IT Infrastructure & Cybersecurity Expert</div>
+            <div class="contact">
+                <span>📍 Paris, France</span>
+                <span>📧 [Your Email]</span>
+                <span>📱 [Your Phone]</span>
+                <span>💼 [LinkedIn]</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="section">
+                <div class="section-title">Professional Profile</div>
+                <div class="profile-text">
+                    Forward-thinking Systems and Network Administrator with proven expertise in IT infrastructure management and cybersecurity solutions. Demonstrated success in implementing cutting-edge solutions that drive system performance and security. Known for innovative problem-solving and dedication to technological excellence.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Core Competencies</div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-title">🖥️ Systems Management</div>
+                        <ul>
+                            <li>Windows Server Infrastructure</li>
+                            <li>Linux Environment (Debian/Ubuntu)</li>
+                            <li>VMware ESXi Virtualization</li>
+                            <li>Cloud Platform Integration</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-title">🔒 Security Expertise</div>
+                        <ul>
+                            <li>Cybersecurity Implementation</li>
+                            <li>SIEM/EDR Solutions</li>
+                            <li>Incident Response</li>
+                            <li>Network Security</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-title">⚙️ Technical Tools</div>
+                        <ul>
+                            <li>Docker & Containerization</li>
+                            <li>Ansible Automation</li>
+                            <li>Git Version Control</li>
+                            <li>Active Directory</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-title">💻 Development</div>
+                        <ul>
+                            <li>Python Programming</li>
+                            <li>Shell Scripting (Bash)</li>
+                            <li>PowerShell Automation</li>
+                            <li>SQL Database Management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Professional Experience</div>
+                
+                <div class="experience-item">
+                    <div class="job-title">Senior Systems Administrator</div>
+                    <div class="company">Viveris, Rungis</div>
+                    <div class="date">2024 - Present</div>
+                    <ul>
+                        <li>Manage enterprise-level Windows server infrastructure and Active Directory services</li>
+                        <li>Lead VMware ESXi deployment and optimization initiatives</li>
+                        <li>Implement comprehensive security protocols and best practices</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-title">Systems Administrator</div>
+                    <div class="company">AnotherBrain, Paris</div>
+                    <div class="date">2022 - 2024</div>
+                    <ul>
+                        <li>Developed sophisticated Ansible automation solutions for system management</li>
+                        <li>Implemented and maintained Wazuh SIEM/EDR security system</li>
+                        <li>Established robust public key infrastructure using Smallstep</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-title">Systems Administrator</div>
+                    <div class="company">Aramis, Saint-Pierre-du-Perray</div>
+                    <div class="date">2020 - 2021</div>
+                    <ul>
+                        <li>Led Windows systems optimization and performance enhancement initiatives</li>
+                        <li>Managed incident response and system monitoring operations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Education</div>
+                <div class="education-item">
+                    <div class="job-title">Bachelor's in Systems and Network Administration</div>
+                    <div class="company">Creative Technology School, Paris</div>
+                    <div class="date">2021 - 2022</div>
+                </div>
+                <div class="education-item">
+                    <div class="job-title">Higher Technical Certificate in Computer Programming</div>
+                    <div class="company">European Institute of Technology, Paris</div>
+                    <div class="date">2017 - 2019</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Languages</div>
+                <div class="language-grid">
+                    <div class="language-item">
+                        <span class="language-name">French</span>
+                        <span class="language-level">Native</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="language-name">English</span>
+                        <span class="language-level">Intermediate</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="language-name">Spanish</span>
+                        <span class="language-level">Basic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
